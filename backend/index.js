@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import { dataRoute, claimtTypeRoute } from "./routes/!routesExports.js";
+import { dataRoute, userRoute } from "./routes/!routesExports.js";
 import connectToDb from "./db/index.db.js";
 
 dotenv.config();
@@ -22,6 +22,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/data", dataRoute);
+app.use("/api/user", userRoute);
 
 app.listen(PORT, () => {
   connectToDb();
