@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { dataRoute, userRoute } from "./routes/!routesExports.js";
 import connectToDb from "./db/index.db.js";
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ app.use(
   })
 );
 app.use(express.json());
+app.use(cookieParser());
 
 app.get("/", (req, res) => {
   res.send("App is working. Hello world!!");

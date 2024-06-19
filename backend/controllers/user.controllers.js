@@ -28,7 +28,12 @@ export const loginUser = async (req, res) => {
 
     generateAndAccessToken(user._id, res);
 
-    res.status(200).json({
+    // console.log(
+    //   "this is the cookie after generation: ",
+    //   res.cookies?.jwt || "Where is the cookie"
+    // );
+
+    return res.status(200).json({
       _id: user._id,
       fullname: user.fullname,
     });
@@ -40,7 +45,21 @@ export const loginUser = async (req, res) => {
   }
 };
 
-export const logoutUser = async (req, res) => {};
+export const logoutUser = async (_, res) => {
+  try {
+    res.cookie("jwt", "", {
+      maxAge: 0,
+    });
+    res.status(200).json({
+      message: "Logged Out Successfull!!",
+    });
+  } catch (error) {
+    console.log("ERROR IN LOGOUT USER: ", error.message);
+    res.status(500).json({
+      error: "Internal Server Error",
+    });
+  }
+};
 
 export const signupUser = async (req, res) => {
   try {
