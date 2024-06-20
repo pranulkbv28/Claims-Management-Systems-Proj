@@ -27,6 +27,7 @@ export const loginUser = async (req, res) => {
     }
 
     generateAndAccessToken(user._id, res);
+    const expiresAt = Date.now() + 10 * 24 * 60 * 60 * 1000; //(logged in time + 10 days) in miliseconds
 
     // console.log(
     //   "this is the cookie after generation: ",
@@ -36,6 +37,7 @@ export const loginUser = async (req, res) => {
     return res.status(200).json({
       _id: user._id,
       fullname: user.fullname,
+      expiresAt,
     });
   } catch (error) {
     console.log("ERROR IN LOGIN USER: ", error.message);

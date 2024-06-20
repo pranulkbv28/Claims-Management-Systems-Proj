@@ -10,6 +10,9 @@ import {
   GetClaim,
   DeleteClaim,
 } from "./pages/!pagesExports.js";
+import Login from "./pages/Login/Login.jsx";
+import Signup from "./pages/Signup/Signup.jsx";
+import { AuthContextProvider } from "./contexts/AuthContext.jsx";
 
 const router = createBrowserRouter([
   {
@@ -36,12 +39,22 @@ const router = createBrowserRouter([
         path: "/delete-claim",
         element: <DeleteClaim />,
       },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/signup",
+        element: <Signup />,
+      },
     ],
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthContextProvider>
+      <RouterProvider router={router} />
+    </AuthContextProvider>
   </React.StrictMode>
 );
